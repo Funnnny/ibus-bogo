@@ -1,12 +1,13 @@
 PREFIX = /usr
 APP_ROOT = $(DESTDIR)$(PREFIX)/share/ibus-bogo
 IBUS_ROOT = $(DESTDIR)$(PREFIX)/share/ibus
+PYTHON = $(shell which python3)
 
 all:
 
 
 run:
-	python3 ibus_engine/main.py
+	${PYTHON} ibus_engine/main.py
 
 install:
 	# TODO: More fine-grain copying
@@ -15,9 +16,9 @@ install:
 	mkdir --parent $(IBUS_ROOT)/component/
 	cp ibus_engine/data/bogo.xml $(IBUS_ROOT)/component/
 	sed -i \
-                 -e "s|@EXEC_PATH@|`which python3` $(APP_ROOT)/ibus_engine/main.py|g" \
+                 -e "s|@EXEC_PATH@|${PYTHON} $(APP_ROOT)/ibus_engine/main.py|g" \
                  -e "s|@ICON_PATH@|${APP_ROOT}/ibus_engine/data/ibus-bogo-dev.svg|g" \
-                 -e "s|@SETUP_PATH@|`which python3` ${APP_ROOT}/gui/controller.py|g" \
+                 -e "s|@SETUP_PATH@|${PYTHON} ${APP_ROOT}/gui/controller.py|g" \
                  $(IBUS_ROOT)/component/bogo.xml
 
 
