@@ -45,7 +45,8 @@ IBUS_BOGO_DEFAULT_CONFIG = {
         "lxterminal",
         "konsole",
         "geany",
-        "skype"
+        "skype",
+        "__nan",
     ],
     "typo-correction-level": 2,
     "typo-correction-threshold": 1

@@ -148,8 +148,11 @@ class Engine(IBus.Engine):
             "awk '/_NET_WM_PID\(CARDINAL\)/{print $NF}'",
             shell=True).decode().strip()
 
-        self.focused_exe = os.path.realpath(
-            "/proc/{0}/exe".format(focused_pid))
+        if focused_pid:
+            self.focused_exe = os.path.realpath(
+                "/proc/{0}/exe".format(focused_pid))
+        else:
+            self.focused_exe = '__nan'
 
         logger.debug("%s focused", self.focused_exe)
 
